@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo_crud.dao.StudentDao">
+
+    <select id="getAllStudent" resultType="com.demo_crud.entity.Student">
+            SELECT
+              `id`,
+              `stu_name`,
+              `age`,
+              `sex`
+            FROM
+              `student`.`stu`
+    </select>
+
+    <select id="getStudentById" parameterType="Integer" resultType="com.demo_crud.entity.Student">
+       SELECT
+          `id`,
+          `stu_name`,
+          `age`,
+          `sex`
+        FROM
+          `stu` WHERE id =#{id}
+    </select>
+
+    <update id="updateStudent" parameterType="com.demo_crud.entity.Student"  >
+        UPDATE
+          `student`.`stu`
+        SET
+          `stu_name` = #{stu_name},
+          `age` = #{age},
+          `sex` = #{sex}
+        WHERE `id` = #{id};
+    </update>
+
+    <insert id="saveStudent" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="com.demo_crud.entity.Student"  >
+            INSERT INTO
+            `student`.`stu` ( `stu_name`, `age`, `sex`)
+            VALUES
+              ( #{stu_name},
+               #{age},
+               #{sex});
+    </insert>
+    
+    <delete id="deleteStudent" parameterType="Integer" >
+        DELETE
+        FROM
+          `student`.`stu`
+        WHERE `id` = #{id};
+    </delete>
+
+</mapper>
